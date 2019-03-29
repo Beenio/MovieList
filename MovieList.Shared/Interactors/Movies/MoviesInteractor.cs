@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using MovieList.API.Enums;
-using MovieList.API.Exceptions;
 using MovieList.API.Responses.Movies;
 using MovieList.API.Services.Movies;
-using Newtonsoft.Json;
 
 namespace MovieList.Shared.Interactors.Movies
 {
