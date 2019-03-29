@@ -16,7 +16,7 @@ namespace MovieList.Shared.Modules.Movies
             Container.Verify();
         }
 
-        public MoviesModule NewInstance(IMoviesView View)
+        public static MoviesModule NewInstance(IMoviesView View)
         {
             return new MoviesModule(View);
         }

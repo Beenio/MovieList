@@ -1,5 +1,6 @@
 ﻿using MovieList.Shared.Interactors;
 using MovieList.Shared.Views;
+using SimpleInjector;
 
 namespace MovieList.Shared.Presenters
 {

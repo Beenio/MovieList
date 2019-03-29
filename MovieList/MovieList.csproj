@@ -82,6 +82,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="SimpleInjector">
+      <HintPath>..\packages\SimpleInjector.4.5.1\lib\netstandard2.0\SimpleInjector.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
@@ -94,16 +97,21 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="ViewControllers\MoviesViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Infrastructure\ViewControllerBase.cs" />
     <Compile Include="ViewControllers\MoviesViewController.cs" />
+    <Compile Include="ViewControllers\MoviesViewController.designer.cs">
+      <DependentUpon>MoviesViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieList.Shared\MovieList.Shared.csproj">
