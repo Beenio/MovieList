@@ -21,4 +21,7 @@
   <ItemGroup>
     <PackageReference Include="SimpleInjector" Version="4.5.1" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MovieList.API\MovieList.API.csproj" />
+  </ItemGroup>
 </Project>

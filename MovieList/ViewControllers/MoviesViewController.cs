@@ -19,11 +19,17 @@ namespace MovieList.ViewControllers
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            FetchMovies();
         }
 
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();
+        }
+
+        async void FetchMovies()
+        {
+            await Presenter.FetchMovieList();
         }
     }
 }

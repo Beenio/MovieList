@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace MovieList.API
 {
-    public class HttpRequestManager<Request, Response>  where Request : GenericRequest
+    public class HttpRequestManager<Request, Response> where Request : GenericRequest
                                                         where Response : GenericResponse
     {
         public CancellationTokenSource CancellationTokenSource { get; private set; }

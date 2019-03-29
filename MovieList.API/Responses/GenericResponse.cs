@@ -3,8 +3,5 @@ namespace MovieList.API.Responses
 {
     public class GenericResponse
     {
-        public GenericResponse()
-        {
-        }
     }
 }

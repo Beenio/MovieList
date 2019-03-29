@@ -10,7 +10,9 @@
     <Folder Include="Services\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Enums\" />
-    <Folder Include="Services\Interface\" />
+    <Folder Include="Services\Movies\" />
+    <Folder Include="Constants\" />
+    <Folder Include="Responses\Movies\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
