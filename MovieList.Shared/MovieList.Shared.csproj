@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+    <Compile Remove="Interactors\Interface\IInteractorBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interactors\" />
+    <Folder Include="Presenters\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\Movies\" />
+    <Folder Include="Interactors\Movies\" />
+    <Folder Include="Presenters\Movies\" />
+    <Folder Include="Modules\" />
+    <Folder Include="Modules\Movies\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SimpleInjector" Version="4.5.1" />
+  </ItemGroup>
+</Project>
