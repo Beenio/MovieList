@@ -18,6 +18,9 @@
     <Folder Include="Modules\" />
     <Folder Include="Modules\Movies\" />
     <Folder Include="Resources\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="ViewModels\Movies\" />
+    <Folder Include="Constants\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SimpleInjector" Version="4.5.1" />
@@ -35,5 +38,8 @@
     <Compile Update="Resources\Strings.Designer.cs">
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="ViewModels\Movies\MovieViewModel.config" />
   </ItemGroup>
 </Project>

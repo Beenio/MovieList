@@ -96,6 +96,10 @@
   <ItemGroup>
     <Folder Include="Infrastructure\" />
     <Folder Include="ViewControllers\" />
+    <Folder Include="ViewControllers\DataSources\" />
+    <Folder Include="ViewControllers\DataSources\Movies\" />
+    <Folder Include="ViewCells\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -113,6 +117,12 @@
     <Compile Include="ViewControllers\MoviesViewController.cs" />
     <Compile Include="ViewControllers\MoviesViewController.designer.cs">
       <DependentUpon>MoviesViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\UICollectionViewControllerBase.cs" />
+    <Compile Include="ViewControllers\DataSources\Movies\MoviesDataSource.cs" />
+    <Compile Include="MovieViewCell.cs" />
+    <Compile Include="MovieViewCell.designer.cs">
+      <DependentUpon>MovieViewCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

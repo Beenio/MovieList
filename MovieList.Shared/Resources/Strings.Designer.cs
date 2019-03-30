@@ -47,6 +47,12 @@ namespace MovieList.Shared.Resources {
             }
         }
         
+        public static string MoviesTitle {
+            get {
+                return ResourceManager.GetString("MoviesTitle", resourceCulture);
+            }
+        }
+        
         public static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
