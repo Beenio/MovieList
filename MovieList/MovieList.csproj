@@ -100,10 +100,12 @@
     <Folder Include="ViewControllers\DataSources\Movies\" />
     <Folder Include="ViewCells\" />
     <Folder Include="Resources\" />
+    <Folder Include="ViewControllers\MovieDetails\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="ViewControllers\MoviesViewController.xib" />
+    <InterfaceDefinition Include="ViewControllers\MovieDetails\MovieDetailsViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -123,6 +125,10 @@
     <Compile Include="MovieViewCell.cs" />
     <Compile Include="MovieViewCell.designer.cs">
       <DependentUpon>MovieViewCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\MovieDetails\MovieDetailsViewController.cs" />
+    <Compile Include="ViewControllers\MovieDetails\MovieDetailsViewController.designer.cs">
+      <DependentUpon>MovieDetailsViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

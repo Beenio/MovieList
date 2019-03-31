@@ -10,10 +10,10 @@ namespace MovieList.Shared.Interactors.Movies
     {
         public CancellationTokenSource CancellationTokenSource { get; private set; }
 
-        public async Task<List<MovieResponse>> FetchMovieList()
+        public async Task<List<MovieResponse>> FetchMovieList(int Page)
         {
             var Service = new MoviesService();
-            var Movies = await Service.FetchMovies();
+            var Movies = await Service.FetchMovies(Page);
 
             return Movies;
         }

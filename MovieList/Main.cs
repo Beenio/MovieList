@@ -1,4 +1,5 @@
-﻿using UIKit;
+﻿using System;
+using UIKit;
 
 namespace MovieList
 {
@@ -6,7 +7,14 @@ namespace MovieList
     {
         static void Main(string[] args)
         {
-            UIApplication.Main(args, null, "AppDelegate");
+            try
+            {
+                UIApplication.Main(args, null, "AppDelegate");
+            }
+            catch (Exception e)
+            {
+                var r = e.Message;
+            }
         }
     }
 }

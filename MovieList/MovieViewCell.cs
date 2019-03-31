@@ -24,29 +24,23 @@ namespace MovieList
             if (!Created)
                 CreateComponents();
 
+            ImageView.Image = null;
             TitleLabel.Text = Movie.Title;
 
             NSUrlSession.SharedSession.CreateDataTask(new NSUrl(Movie.Poster), (data, response, error) =>
             {
                 if(data != null)
                 {
-                    var Image = new UIImage(data);
-                    DispatchQueue.MainQueue.DispatchAsync(() => {
-                        ImageView.Image = Image;
-                    });
+                    try
+                    {
+                        var Image = new UIImage(data);
+                        DispatchQueue.MainQueue.DispatchAsync(() => {
+                            ImageView.Image = Image;
+                        });
+                    }
+                    catch (Exception) { }
                 }
             }).Resume();
-        }
-
-        UIImage FromUrl(string uri)
-        {
-            using (var url = new NSUrl(uri))
-            {
-                using (var data = NSData.FromUrl(url))
-                {
-                    return UIImage.LoadFromData(data);
-                }
-            }
         }
 
         void CreateComponents()

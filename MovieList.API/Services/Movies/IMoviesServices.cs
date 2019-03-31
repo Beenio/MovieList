@@ -6,6 +6,6 @@ namespace MovieList.API.Services.Movies
 {
     public interface IMoviesServices
     {
-        Task<List<MovieResponse>> FetchMovies();
+        Task<List<MovieResponse>> FetchMovies(int Page);
     }
 }

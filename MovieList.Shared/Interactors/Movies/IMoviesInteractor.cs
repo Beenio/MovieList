@@ -6,6 +6,6 @@ namespace MovieList.Shared.Interactors.Movies
 {
     public interface IMoviesInteractor : IInteractorBase
     {
-        Task<List<MovieResponse>> FetchMovieList();
+        Task<List<MovieResponse>> FetchMovieList(int Page);
     }
 }

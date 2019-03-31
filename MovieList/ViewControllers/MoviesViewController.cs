@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using CoreFoundation;
 using Foundation;
-using MovieList.API.Responses.Movies;
 using MovieList.Infrastructure;
 using MovieList.Shared.Modules.Movies;
 using MovieList.Shared.Presenters.Movies;
@@ -9,12 +10,13 @@ using MovieList.Shared.ViewModels.Movies;
 using MovieList.Shared.Views;
 using MovieList.Shared.Views.Movies;
 using MovieList.ViewControllers.DataSources.Movies;
+using MovieList.ViewControllers.MovieDetails;
 using SimpleInjector;
 using UIKit;
 
 namespace MovieList.ViewControllers
 {
-    public partial class MoviesViewController : ViewControllerBase<MoviesPresenter>, IMoviesView, IUICollectionViewDelegateFlowLayout
+    public partial class MoviesViewController : ViewControllerBase<MoviesPresenter>, IMoviesView, IUICollectionViewDelegateFlowLayout, IUICollectionViewDelegate
     {
         protected override IViewBase ViewShared => this;
         protected override Container Container => MoviesModule.NewInstance(this).Container;
@@ -22,6 +24,9 @@ namespace MovieList.ViewControllers
         UIEdgeInsets SectionInsets = new UIEdgeInsets(0, 10, 0, 10);
 
         int ItensPerRow = 2;
+        nfloat MaxWidth = 182;
+        bool IsLoading = false;
+        List<MovieViewModel> Movies = new List<MovieViewModel>();
 
         public MoviesViewController() : base("MoviesViewController", null)
         {
@@ -31,6 +36,10 @@ namespace MovieList.ViewControllers
         {
             base.ViewDidLoad();
             this.Title = Strings.MoviesTitle;
+
+            collectionView.RegisterClassForCell(typeof(MovieViewCell), MovieViewCell.Key);
+            collectionView.DataSource = new MoviesDataSource(Movies);
+            collectionView.Delegate = this;
 
             FetchMovies();
         }
@@ -44,10 +53,12 @@ namespace MovieList.ViewControllers
         {
             InvokeOnMainThread(() =>
             {
-                collectionView.RegisterClassForCell(typeof(MovieViewCell), MovieViewCell.Key);
-                collectionView.DataSource = new MoviesDataSource(Movies);
-                collectionView.Delegate = this;
-                collectionView.ReloadData();
+                this.Movies.AddRange(Movies);
+                DispatchQueue.MainQueue.DispatchAsync(() => 
+                {
+                    collectionView.ReloadData();
+                });
+                IsLoading = false;
             });
         }
 
@@ -57,9 +68,9 @@ namespace MovieList.ViewControllers
             var Padding = SectionInsets.Left * (ItensPerRow + 1);
             var AvailableWidth = View.Frame.Width - Padding;
             var WidthPerItem = AvailableWidth / ItensPerRow;
-            if (WidthPerItem > 182)
-                WidthPerItem = 182;
-            return new CoreGraphics.CGSize(WidthPerItem, 300);
+            if (WidthPerItem > MaxWidth)
+                WidthPerItem = MaxWidth;
+            return new CoreGraphics.CGSize(WidthPerItem, 350);
         }
 
         [Export("collectionView:layout:insetForSectionAtIndex:")]
@@ -72,6 +83,24 @@ namespace MovieList.ViewControllers
         public System.nfloat GetMinimumLineSpacingForSection(UICollectionView collectionView, UICollectionViewLayout layout, System.nint section)
         {
             return SectionInsets.Left;
+        }
+
+        [Export("collectionView:willDisplayCell:forItemAtIndexPath:")]
+        public async void WillDisplayCell(UICollectionView collectionView, UICollectionViewCell cell, NSIndexPath indexPath)
+        {
+            if (indexPath.Row == Movies.Count - 1 && !IsLoading)
+            {
+                IsLoading = true;
+                await Presenter.LoadMore();
+            }
+        }
+
+        [Export("collectionView:didSelectItemAtIndexPath:")]
+        public void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
+        {
+            var Selected = Movies[indexPath.Row];
+
+            this.NavigationController.PushViewController(new MovieDetailsViewController(Selected), true);
         }
     }
 }

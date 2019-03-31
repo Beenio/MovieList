@@ -20,6 +20,8 @@ namespace MovieList.ViewControllers.DataSources.Movies
         {
             var Cell = collectionView.DequeueReusableCell(MovieViewCell.Key, indexPath) as MovieViewCell;
             Cell.SetupCell(Movies[indexPath.Row]);
+            Cell.Layer.ShouldRasterize = true;
+            Cell.Layer.RasterizationScale = UIScreen.MainScreen.Scale;
             return Cell;
         }
 
