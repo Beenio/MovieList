@@ -14,5 +14,9 @@ namespace MovieList.API.Responses.Movies
         public string Description { get; set; }
         [JsonProperty("poster_path")]
         public string Poster { get; set; }
+        [JsonProperty("release_date")]
+        public string ReleaseDate { get; set; }
+        [JsonProperty("genre_ids")]
+        public int[] GenreIds { get; set; }
     }
 }

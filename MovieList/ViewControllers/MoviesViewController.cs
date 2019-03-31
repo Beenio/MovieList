@@ -41,11 +41,12 @@ namespace MovieList.ViewControllers
             collectionView.DataSource = new MoviesDataSource(Movies);
             collectionView.Delegate = this;
 
-            FetchMovies();
+            Init();
         }
 
-        async void FetchMovies()
+        async void Init()
         {
+            await Presenter.FetchGenres();
             await Presenter.FetchMovieList();
         }
 
@@ -70,7 +71,7 @@ namespace MovieList.ViewControllers
             var WidthPerItem = AvailableWidth / ItensPerRow;
             if (WidthPerItem > MaxWidth)
                 WidthPerItem = MaxWidth;
-            return new CoreGraphics.CGSize(WidthPerItem, 350);
+            return new CoreGraphics.CGSize(WidthPerItem, 360);
         }
 
         [Export("collectionView:layout:insetForSectionAtIndex:")]
@@ -99,7 +100,6 @@ namespace MovieList.ViewControllers
         public void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
             var Selected = Movies[indexPath.Row];
-
             this.NavigationController.PushViewController(new MovieDetailsViewController(Selected), true);
         }
     }

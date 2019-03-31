@@ -70,4 +70,7 @@
   <data name="MoviesNotFound" xml:space="preserve">
     <value>Erro ao buscar a lista de filmes.</value>
   </data>
+     <data name="GenresNotFound" xml:space="preserve">
+    <value>Erro ao buscar a lista de gêneros.</value>
+  </data>
 </root>

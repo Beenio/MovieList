@@ -13,8 +13,12 @@
     <Folder Include="Services\Movies\" />
     <Folder Include="Constants\" />
     <Folder Include="Responses\Movies\" />
+    <Folder Include="Responses\Genres\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Responses\Genres\GenreListResponse.config" />
   </ItemGroup>
 </Project>

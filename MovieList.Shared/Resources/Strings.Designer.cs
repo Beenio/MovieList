@@ -70,5 +70,11 @@ namespace MovieList.Shared.Resources {
                 return ResourceManager.GetString("MoviesNotFound", resourceCulture);
             }
         }
+        
+        public static string GenresNotFound {
+            get {
+                return ResourceManager.GetString("GenresNotFound", resourceCulture);
+            }
+        }
     }
 }
