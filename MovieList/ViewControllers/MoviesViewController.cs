@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CoreFoundation;
 using Foundation;
 using MovieList.Infrastructure;
@@ -40,7 +41,6 @@ namespace MovieList.ViewControllers
             collectionView.RegisterClassForCell(typeof(MovieViewCell), MovieViewCell.Key);
             collectionView.DataSource = new MoviesDataSource(Movies);
             collectionView.Delegate = this;
-
             Init();
         }
 
@@ -54,11 +54,11 @@ namespace MovieList.ViewControllers
         {
             InvokeOnMainThread(() =>
             {
+                var paths = Movies.Select(s => NSIndexPath.FromItemSection(Movies.IndexOf(s)+this.Movies.Count, 0)).ToArray();
                 this.Movies.AddRange(Movies);
-                DispatchQueue.MainQueue.DispatchAsync(() => 
-                {
-                    collectionView.ReloadData();
-                });
+                collectionView.PerformBatchUpdates(delegate {
+                    collectionView.InsertItems(paths);
+                }, null);
                 IsLoading = false;
             });
         }
@@ -89,7 +89,7 @@ namespace MovieList.ViewControllers
         [Export("collectionView:willDisplayCell:forItemAtIndexPath:")]
         public async void WillDisplayCell(UICollectionView collectionView, UICollectionViewCell cell, NSIndexPath indexPath)
         {
-            if (indexPath.Row == Movies.Count - 1 && !IsLoading)
+            if (indexPath.Row == Movies.Count - 2 && !IsLoading)
             {
                 IsLoading = true;
                 await Presenter.LoadMore();
