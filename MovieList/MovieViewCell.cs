@@ -14,13 +14,17 @@ namespace MovieList
 
         UIImageView ImageView;
         UILabel TitleLabel, Genres, ReleaseDate;
+        NSUrlSessionDataTask Data;
 
         public MovieViewCell (IntPtr handle) : base (handle)
         {
         }
 
-        public void SetupCell(MovieViewModel Movie)
+        public async void SetupCell(MovieViewModel Movie)
         {
+            Data?.Cancel();
+            Data = null;
+
             if (!Created)
                 CreateComponents();
 
@@ -29,20 +33,23 @@ namespace MovieList
             Genres.Text = Movie.Genres;
             ReleaseDate.Text = Movie.ReleaseDate;
 
-            NSUrlSession.SharedSession.CreateDataTask(new NSUrl(Movie.Poster), (data, response, error) =>
+            var Request = NSUrlSession.SharedSession.CreateDataTaskAsync(new NSUrl(Movie.Poster), out Data);
+            Data.Resume();
+
+            var Response = await Request;
+
+            if(Response != null && Response.Data != null)
             {
-                if(data != null)
+                try
                 {
-                    try
+                    var Image = new UIImage(Response.Data);
+                    DispatchQueue.MainQueue.DispatchAsync(() =>
                     {
-                        var Image = new UIImage(data);
-                        DispatchQueue.MainQueue.DispatchAsync(() => {
-                            ImageView.Image = Image;
-                        });
-                    }
-                    catch (Exception) { }
+                        ImageView.Image = Image;
+                    });
                 }
-            }).Resume();
+                catch (Exception) { }
+            }
         }
 
         void CreateComponents()
