@@ -36,11 +36,11 @@ namespace MovieList
             var Request = NSUrlSession.SharedSession.CreateDataTaskAsync(new NSUrl(Movie.Poster), out Data);
             Data.Resume();
 
-            var Response = await Request;
-
-            if(Response != null && Response.Data != null)
+            try
             {
-                try
+                var Response = await Request;
+
+                if (Response != null && Response.Data != null)
                 {
                     var Image = new UIImage(Response.Data);
                     DispatchQueue.MainQueue.DispatchAsync(() =>
@@ -48,8 +48,8 @@ namespace MovieList
                         ImageView.Image = Image;
                     });
                 }
-                catch (Exception) { }
             }
+            catch (Exception) { }
         }
 
         void CreateComponents()
