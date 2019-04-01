@@ -12,6 +12,7 @@ namespace MovieList
         public static string Key = "MovieCell";
         bool Created = false;
 
+        public UIImage CurrentImage { get; private set; }
         UIImageView ImageView;
         UILabel TitleLabel, Genres, ReleaseDate;
         NSUrlSessionDataTask Data;
@@ -46,6 +47,7 @@ namespace MovieList
                     DispatchQueue.MainQueue.DispatchAsync(() =>
                     {
                         ImageView.Image = Image;
+                        CurrentImage = Image;
                     });
                 }
             }

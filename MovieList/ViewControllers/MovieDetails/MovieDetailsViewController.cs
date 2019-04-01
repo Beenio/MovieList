@@ -16,22 +16,31 @@ namespace MovieList.ViewControllers.MovieDetails
         protected override Container Container => MoviesModule.NewInstance(this).Container;
 
         MovieViewModel Movie;
+        UIImage Image;
 
-        public MovieDetailsViewController(MovieViewModel Movie) : base("MovieDetailsViewController", null)
+        public MovieDetailsViewController(MovieViewModel Movie, UIImage Image) : base("MovieDetailsViewController", null)
         {
             this.Movie = Movie;
+            this.Image = Image;
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // Perform any additional setup after loading the view, typically from a nib.
+            SetupView();
+        }
+        public void SetupView()
+        {
+            ivPoster.Image = Image;
+            tfGenres.Text = Movie.Genres;
+            tfDescription.Text = Movie.Description;
+            tfReleaseDate.Text = Movie.ReleaseDate;
+            tfMovieName.Text = Movie.Title;
         }
 
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();
-            // Release any cached data, images, etc that aren't in use.
         }
 
         public void SetMovies(List<MovieViewModel> Movies)

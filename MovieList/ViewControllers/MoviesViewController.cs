@@ -100,7 +100,8 @@ namespace MovieList.ViewControllers
         public void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
             var Selected = Movies[indexPath.Row];
-            this.NavigationController.PushViewController(new MovieDetailsViewController(Selected), true);
+            var Cell = collectionView.CellForItem(indexPath) as MovieViewCell;
+            this.NavigationController.PushViewController(new MovieDetailsViewController(Selected, Cell.CurrentImage), true);
         }
     }
 }
