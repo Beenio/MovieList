@@ -1,1 +1,3 @@
-Readme
+Plugins:
+  - Newtonsoft.Json -> Handle Json response
+  - SimpleInjector -> Dependency Injector
