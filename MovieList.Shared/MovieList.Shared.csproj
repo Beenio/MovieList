@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+    <Compile Remove="Interactors\Interface\IInteractorBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interactors\" />
+    <Folder Include="Presenters\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\Movies\" />
+    <Folder Include="Interactors\Movies\" />
+    <Folder Include="Presenters\Movies\" />
+    <Folder Include="Modules\" />
+    <Folder Include="Modules\Movies\" />
+    <Folder Include="Resources\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="ViewModels\Movies\" />
+    <Folder Include="Constants\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SimpleInjector" Version="4.5.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MovieList.API\MovieList.API.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\Strings.Designer.cs">
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="ViewModels\Movies\MovieViewModel.config" />
+  </ItemGroup>
+</Project>
